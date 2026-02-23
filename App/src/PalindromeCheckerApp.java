@@ -1,24 +1,21 @@
-class PalindromeChecker {
+public class PalindromeChecker {
 
     public static void main(String[] args) {
 
         // Hardcoded string
-        String str = "pranav";
+        String original = "level";
+        String reversed = "";
 
-        int length = str.length();
-        boolean isPalindrome = true;
-
-        for (int i = 0; i < length / 2; i++) {
-            if (str.charAt(i) != str.charAt(length - 1 - i)) {
-                isPalindrome = false;
-                break;
-            }
+        // Manually reverse the string
+        for (int i = original.length() - 1; i >= 0; i--) {
+            reversed = reversed + original.charAt(i);
         }
 
-        if (isPalindrome) {
-            System.out.println(str + " is a palindrome.");
+        // Compare original and reversed strings
+        if (original.equals(reversed)) {
+            System.out.println(original + " is a palindrome.");
         } else {
-            System.out.println(str + " is not a palindrome.");
+            System.out.println(original + " is not a palindrome.");
         }
     }
 }
