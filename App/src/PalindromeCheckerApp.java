@@ -1,37 +1,46 @@
-import java.util.Stack;
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Scanner;
 
-public class PalindromeCheckerApp {
+public class UseCase7PalindromeCheckerApp {
 
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
 
-        // Hardcoded input string
-        String input = "madam";
+        System.out.println("=== UC7: Deque-Based Optimized Palindrome Checker ===");
+        System.out.print("Enter a string: ");
+        String input = sc.nextLine();
 
-        // Create Stack
-        Stack<Character> stack = new Stack<>();
+        // Normalize input: remove spaces and convert to lowercase
+        String normalized = input.replaceAll("\\s+", "").toLowerCase();
 
-        // Push characters into stack
-        for (int i = 0; i < input.length(); i++) {
-            stack.push(input.charAt(i));
+        Deque<Character> deque = new LinkedList<>();
+
+        // Insert characters into deque
+        for (char ch : normalized.toCharArray()) {
+            deque.addLast(ch);
         }
 
         boolean isPalindrome = true;
 
-        // Pop and compare
-        for (int i = 0; i < input.length(); i++) {
-            char poppedChar = stack.pop();
+        // Compare front and rear until empty or mismatch
+        while (deque.size() > 1) {
+            char front = deque.removeFirst();
+            char rear = deque.removeLast();
 
-            if (input.charAt(i) != poppedChar) {
+            if (front != rear) {
                 isPalindrome = false;
                 break;
             }
         }
 
-        // Print result
+        // Display result
         if (isPalindrome) {
-            System.out.println(input + " is a Palindrome.");
+            System.out.println("Result: \"" + input + "\" is a Palindrome ✅");
         } else {
-            System.out.println(input + " is NOT a Palindrome.");
+            System.out.println("Result: \"" + input + "\" is NOT a Palindrome ❌");
         }
+
+        sc.close();
     }
 }
